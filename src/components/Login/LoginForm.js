@@ -1,4 +1,5 @@
 import React,{Component, PropTypes} from 'react';
+<<<<<<< HEAD
 import {StyleSheet, Spinner, Button, View, TextInput, TouchableOpacity, Text, StatusBar, NavigatorIOS } from 'react-native';
 import MainView from './MainView';
 export default class LoginForm extends Component {
@@ -38,6 +39,31 @@ export default class LoginForm extends Component {
             return <Spinner />;    
         }
         return <Button onPress={this.onLoginPress.bind(this)} title="Log in" />;
+=======
+import {StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, NavigatorIOS } from 'react-native';
+import MainView from './MainView';
+
+
+export default class LoginForm extends Component {
+
+    // static propTypes = {
+    //     title: PropTypes.string.isRequired,
+    //     navigator: PropTypes.object.isRequired,
+    // }
+
+    _handleLogIn(){
+        //navigate('Projects');
+        // this.props.navigator.push({ 
+        //     navigationBarHidden: false,
+        //     component : MainView,
+        //     title: 'Projects',
+        //     leftButtonIcon: null, 
+        //     leftButtonTitle: ' ',
+        //     barTintColor : '#22A86D',
+        //     titleTextColor: '#fff',
+        //     tintColor :'#fff'
+        // });
+>>>>>>> bccfab1e45e3b7d1292e6117436016ea843af533
     }
     render(){
 
@@ -48,10 +74,15 @@ export default class LoginForm extends Component {
                     barStyle="light-content" 
                 />
                 <TextInput 
+<<<<<<< HEAD
                     placeholder="Email"
                     placeholderTextColor='#bdc3c7' 
                     onChangeText={(text) => this.setState({email: text})}
                     value={this.state.email}
+=======
+                    placeholder="Username"
+                    placeholderTextColor='#fff' 
+>>>>>>> bccfab1e45e3b7d1292e6117436016ea843af533
                     style={styles.input}
                     returnKeyType="next" 
                     onSubmitEditing={() => this.passWordInput.focus()}
@@ -62,19 +93,32 @@ export default class LoginForm extends Component {
 
                 <TextInput 
                     placeholder="Password" 
+<<<<<<< HEAD
                     placeholderTextColor='#bdc3c7'
                     onChangeText={(text)=> this.setState({password:text})} 
                     value={this.state.password}
+=======
+                    placeholderTextColor='#fff' 
+>>>>>>> bccfab1e45e3b7d1292e6117436016ea843af533
                     secureTextEntry 
                     style={styles.input}
                     returnKeyType="go"
                     ref={(input) => this.passWordInput = input} 
                 />
 
+<<<<<<< HEAD
                 
 
                
                 {this.renderButtonOrSpinner()}
+=======
+                <TouchableOpacity style={styles.buttonContainer} onPress={()=> navigate('Projects', { navigation: this.props.navigation })}>
+                    <Text style={styles.buttonText}>
+                        LOGIN
+                    </Text>
+                </TouchableOpacity>
+
+>>>>>>> bccfab1e45e3b7d1292e6117436016ea843af533
                 <TouchableOpacity>
                     <Text style={styles.textStyle}>
                         Forgot password

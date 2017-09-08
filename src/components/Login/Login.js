@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import {StyleSheet, View, Image, Text, KeyboardAvoidingView, NavigatorIOS } from 'react-native';
 import LoginForm from './LoginForm';
 
+<<<<<<< HEAD
 import Firebase from "../../include/firebase/firebase";
 const firebaseApp = Firebase.initialize()
 
@@ -9,6 +10,10 @@ export default class Login extends Component {
 
  static navigationOptions = {header:null };
 
+=======
+export default class Login extends Component {
+ static navigationOptions = {header:null };
+>>>>>>> bccfab1e45e3b7d1292e6117436016ea843af533
     render(){
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -22,7 +27,11 @@ export default class Login extends Component {
                 </View>
                
                 <View style={styles.formContainer}>
+<<<<<<< HEAD
                     <LoginForm title="Login" navigation={this.props.navigation}  firebaseApp={this.firebaseApp}/>
+=======
+                    <LoginForm title="Login" navigation={this.props.navigation}/>
+>>>>>>> bccfab1e45e3b7d1292e6117436016ea843af533
                 </View>
 
             </KeyboardAvoidingView>

@@ -21,7 +21,7 @@ export default class ProjectTableCell extends Component {
         return(
             
             <View style={styles.container}>
-                <TouchableOpacity style={styles.cellContainer} onPress={()=> navigate('ProjectView')}>
+                <TouchableOpacity style={styles.cellContainer} onPress={()=> navigate('DataEntryView')}>
                     <View style={styles.cell}>
                         {/*<View style={styles.styleBox}>*/}
                         <Text> {this.props.name} </Text>

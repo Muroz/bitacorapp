@@ -1,21 +1,35 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import ProjectTable from './ProjectTable';
+import { NavigationActions } from 'react-navigation';
+import { Icon } from 'react-native-elements'
+
 
 export default class MainView extends Component {
-    //static navigationOptions = {headerLeft:null, headerTintColor: "#fff" };
 
     static navigationOptions = ({ navigation, screenProps }) => ({
        title: "Projectos",
-       headerTintColor: "white",
-       headerStyle: {
-         backgroundColor: "#27364E",
-       },
-       headerLeft:null,
-   });
+       headerLeft:
+       <View style={{paddingLeft:16}}>
+           <Icon
+               name="menu"
+               size={30}
+               color='white'
+               onPress={() => navigation.navigate('DrawerOpen')} />
+       </View>,   });
 
     _handleLogout(){
-        this.props.navigator.pop();
+        try {
+           console.log("press sign out") 
+         firebase.auth().signOut();
+         const resetNavigator = NavigationActions.reset({
+            index: 0,
+            action: NavigationActions.navigate({ routeName: 'Unauthorized',}),
+        });
+        this.props.navigation.dispatch(resetNavigator);
+            } catch (error) {
+            console.log(error);
+        }
     }
     
     render() {

@@ -14,7 +14,6 @@ class Firebase {
             databaseURL: "https://bitacorapp-bace1.firebaseio.com",
             projectId: "bitacorapp-bace1",
             storageBucket: "bitacorapp-bace1.appspot.com",
-            messagingSenderId: "24139934642"
           };
           firebase.initializeApp(config);
     }

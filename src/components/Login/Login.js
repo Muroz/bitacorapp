@@ -1,19 +1,40 @@
 import React, { Component} from 'react';
 import {StyleSheet, View, Image, Text, KeyboardAvoidingView, NavigatorIOS } from 'react-native';
+import { NavigationActions } from 'react-navigation';
+
 import LoginForm from './LoginForm';
+import * as firebase from "firebase";
 
-<<<<<<< HEAD
-import Firebase from "../../include/firebase/firebase";
-const firebaseApp = Firebase.initialize()
 
 export default class Login extends Component {
 
  static navigationOptions = {header:null };
 
-=======
-export default class Login extends Component {
- static navigationOptions = {header:null };
->>>>>>> bccfab1e45e3b7d1292e6117436016ea843af533
+    constructor(props){
+        super(props);
+        this.getInitialView();
+    }
+
+    getInitialView() {
+        firebase.auth().onAuthStateChanged((user) => {
+        console.log(user)
+              if (user != null){
+                const resetNavigator = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                        NavigationActions.navigate({
+                            routeName: 'Authorized',
+                        })
+                    ],
+                });
+                this.props.navigation.dispatch(resetNavigator);
+              }else{
+                  console.log("no user ")
+              }
+        
+          });
+        }
+
     render(){
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -27,11 +48,7 @@ export default class Login extends Component {
                 </View>
                
                 <View style={styles.formContainer}>
-<<<<<<< HEAD
-                    <LoginForm title="Login" navigation={this.props.navigation}  firebaseApp={this.firebaseApp}/>
-=======
-                    <LoginForm title="Login" navigation={this.props.navigation}/>
->>>>>>> bccfab1e45e3b7d1292e6117436016ea843af533
+                    <LoginForm title="Login" navigation={this.props.navigation} />
                 </View>
 
             </KeyboardAvoidingView>
@@ -43,24 +60,16 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: "#27364E",
-        // alignItems: 'center',
-        // justifyContent: 'flex-start',
     },
     logo: {
-        //marginTop: 200
-       // height:100,
-       // width: 200,
+        alignItems : 'center',
+        marginTop : 30,
+        
     },
     logoContainer: {
         alignItems : 'center',
-        // justifyContent : 'center',
-        // backgroundColor: "#28110A",
-        // width: 140,
-        // height: 80,
          marginTop: 80,
          marginBottom: 80,
-        // borderWidth: 2,
-        // borderColor: "#fff",
         flex:2,
        
     },
@@ -69,7 +78,6 @@ const styles = StyleSheet.create({
         marginRight: '20%',
         width: 130,
         height: 130,
-        //flex: 3,
         backgroundColor: "#28110A",
         borderWidth: 2,
         borderColor: "#fff",

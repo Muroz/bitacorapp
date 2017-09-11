@@ -15,7 +15,7 @@ export default class ProjectView extends Component {
         return(
              <View style={styles.container}>
                  <ScrollView style={styles.scrollContainer}>
-                    <ProjectTableCell navigation={this.props.navigation} name="Project1" />
+                    <ProjectTableCell navigation={this.props.navigation} name="Open Project 101" />
                 </ScrollView>
              </View>
         );

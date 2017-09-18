@@ -3,8 +3,21 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import BitacoraView from './BitacoraView';
 
 export default class ProjectView extends Component {
-     static navigationOptions = {left:null };
+    constructor(props) {
+        super(props);
+        this.state = { Project: undefined } ;
+      }
+    componentWillMount(){
+        const {state} = this.props.navigation;
+        this.setState({ Project:state.params.Project })
+        console.log(state.params.Project )
+        
+        console.log(this.state)
+    }
+ 
+     static navigationOptions = {title: '1232'};
 
+    
     _handleBitacora(){
         var currentDate = new Date();
         //var dateString = currentDate.getMonth()  + '/' +currentDate.getDate() + "/" + currentDate.getFullYear()
@@ -24,7 +37,7 @@ export default class ProjectView extends Component {
                 <View style={styles.infoContainer}>
                     <Image source={require('../../imgs/companyLogo.png')} style={styles.logo}/>
                     <View style={styles.infoBox}>
-                        <Text style={styles.infoText}> Name: </Text>
+                        <Text style={styles.infoText}> 1231</Text>
                     </View>
                     <View style={styles.infoBox}>
                         <Text style={styles.infoText}> Address: </Text>

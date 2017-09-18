@@ -13,8 +13,12 @@ export default class Login extends Component {
 
     constructor(props){
         super(props);
-        this.getInitialView();
     }
+    componentWillMount(){
+        this.getInitialView();
+        
+    }
+  
 
     getInitialView() {
         firebase.auth().onAuthStateChanged((user) => {

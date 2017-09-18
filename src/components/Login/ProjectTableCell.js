@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import ProjectView from './ProjectView';
-import NavigateActions from 'react-navigation'
+import {NavigateActions, StackNavigator} from 'react-navigation'
 export default class ProjectTableCell extends Component {
     constructor(props) {
         super(props);
@@ -11,13 +11,28 @@ export default class ProjectTableCell extends Component {
       componentWillMount() {
         this.setState({ Project:this.props.Project });
       }
+
+      openProject(){
+        // const navigateAction = NavigateActions.navigate({
+            
+        //       routeName: 'ProjectView',
+            
+        //       params: { Project: this.state.Project}
+            
+        //     })
+        //     console.log(this.props.navigation)
+        //     this.props.navigation.dispatch(navigateAction)
+        const { navigate } = this.props.navigation;
+        navigate("ProjectView", {Project:this.state.Project})
+        
+      }
     
     render() {
         const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
             <TouchableOpacity style={styles.cell}
-            onPress = {navigate('ProjectView', {project: this.state.Project})}
+            onPress = {this.openProject.bind(this)}
             >
             
                     <View style={styles.projectImageView}>

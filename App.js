@@ -8,6 +8,10 @@ import * as firebase from "firebase";
 
 import { StackNavigator } from 'react-navigation';
 import Login from './src/components/Login/Login';
+import MainView from './src/components/Login/MainView';
+import ProjectView from './src/components/Login/ProjectView';
+import DataEntry from './src/components/Login/DataEntry';
+
 import Authorized from './src/navigation/Authorized';
 import Firebase from "./src/include/firebase/firebase";
 const firebaseApp = Firebase.initialize()
@@ -28,11 +32,17 @@ class HomeScreen extends React.Component {
 
 const bitacorapp = StackNavigator({
   Unauthorized: { screen: Login },
-  Authorized:{ screen: Authorized,  navigationOptions: {
-    header: null,
-} }
+  Authorized:{screen: Authorized},
+  ProjectView: { screen: ProjectView },
+  DataEntryView: { screen: DataEntry},
 },{ 
     headerMode: 'screen',
+    navigationOptions: {
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#27364E",
+      }
+    },
   
   });
 

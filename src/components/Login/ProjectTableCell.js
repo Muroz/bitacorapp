@@ -1,72 +1,93 @@
-import React, {Component, PropTypes} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import ProjectView from './ProjectView'
-
+import React, { Component, PropTypes } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import ProjectView from './ProjectView';
+import NavigateActions from 'react-navigation'
 export default class ProjectTableCell extends Component {
-    // static propTypes = {
-    //     navigator: PropTypes.object.isRequired,
-    // }
-    // _handleSelection(){
-    //     this.props.navigator.push({ 
-    //         navigationBarHidden: false,
-    //         component : ProjectView,
-    //         title: 'Project',
-    //         barTintColor : '#22A86D',
-    //         titleTextColor: '#fff',
-    //         tintColor :'#fff'
-    //     });
-    // }
-    render(){
+    constructor(props) {
+        super(props);
+        this.state = { Project: undefined } ;
+      }
+    
+      componentWillMount() {
+        this.setState({ Project:this.props.Project });
+      }
+    
+    render() {
         const { navigate } = this.props.navigation;
-        return(
-            
+        return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.cellContainer} onPress={()=> navigate('DataEntryView')}>
-                    <View style={styles.cell}>
-                        {/*<View style={styles.styleBox}>*/}
-                        <Text> {this.props.name} </Text>
-                        {/*</View>*/}
+            <TouchableOpacity style={styles.cell}
+            onPress = {navigate('ProjectView', {project: this.state.Project})}
+            >
+            
+                    <View style={styles.projectImageView}>
+                        <Image
+                            style={styles.projectImage}
+                            source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }}
+                        />
                     </View>
-                </TouchableOpacity>
+                    <View style={styles.projectDescriptionView}>
+                        <View style={styles.DescriptionView}>
+                            <Text style={styles.projectName}>{this.state.Project.name} </Text>
+                            <Text style={styles.city}>{this.state.Project.city} </Text>
+                        </View>
+
+                    </View>
+
+               </TouchableOpacity>
+            
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flexDirection: 'row',
-        //flex: 1,
-        height: 60,
-        backgroundColor: "white",
-        marginTop: 10,
+    container: {
+        height: 100,
+        backgroundColor: "grey",
+        marginTop: 5,
         alignItems: 'center',
-        margin: 20
-    },
-    cellContainer: {
-        flex: 4,
-        //marginRight: 30, 
- 
+        width: '100%',
+
     },
 
-    cell:{
-        flex:2,
+
+    cell: {
+        flexDirection: 'row',
         justifyContent: 'center',
-        backgroundColor: '#fff',
-        paddingHorizontal: 20,
         borderRadius: 5,
-        // borderWidth: 1,
-        // borderColor: 'black', 
     },
-    // styleBox:{
-    //      //flex: 1,
-    //      position: 'absolute',
-    //      borderBottomWidth: 50,
-    //      borderBottomColor: 'white',
-    //      borderLeftWidth: 0,
-    //      borderLeftColor: 'transparent',
-    //      borderRightWidth: 50,
-    //      borderRightColor: 'transparent',
-    // },
+    projectImage: {
+        width: '100%',
+        height: '100%',
+
+    },
+    projectImageView: {
+        flex: 2,
+        height: '100%',
+        backgroundColor: "red",
+
+    },
+
+    projectDescriptionView: {
+        flex: 4,
+        height: '100%',
+        backgroundColor: "#34495e",
+    },
+
+    DescriptionView: {
+        marginTop: 20,
+        marginLeft: 20,
+        
+    },
+    projectName:{
+         
+        color:'white',
+        fontSize: 20,
+    },
+    city:{
+        color:'white',
+        
+    }
 
 });

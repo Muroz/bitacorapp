@@ -7,15 +7,27 @@ export default class ProjectView extends Component {
     //     navigator: PropTypes.object.isRequired,
     // }
     render(){
+                 // <ProjectTableCell navigation={this.props.navigation} name="Open Project 101" />
+
+                    // <ProjectTableCell navigation={this.props.navigation} name="Open Project 101" />
         const { navigate } = this.props.navigation;
-        var projects = []
-        for (let i = 0; i < 10; i++){
-            //projects.push()
+        var project1= {city: 'ST.JOHN\'S', name: 'project1'}
+        var project2= {city: 'MOUNT PEARL', name: 'project2'}
+        
+        var projects = [project1, project2, project2, project2,project2,project2,project2,project2]
+        var dummy = []
+        for (let i = 0; i < projects.length; i++){
+            dummy.push(
+                <ProjectTableCell key={i} navigation={this.props.navigation} Project={projects[i]} />
+            )
         }
         return(
              <View style={styles.container}>
                  <ScrollView style={styles.scrollContainer}>
-                    <ProjectTableCell navigation={this.props.navigation} name="Open Project 101" />
+   
+                
+                {dummy}
+            
                 </ScrollView>
              </View>
         );
@@ -24,9 +36,9 @@ export default class ProjectView extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        width: '80%',
-        height: '70%',
-        backgroundColor: "#fff",
+        width:'100%',
+        height: '100%',
+        backgroundColor: "#ecf0f1",
         justifyContent: 'flex-start'
     },
     scrollContainer: {

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, StatusBar} from 'react-native';
 import ProjectTable from './ProjectTable';
 import { NavigationActions } from 'react-navigation';
-import { Icon } from 'react-native-elements'
-
+import { Icon } from 'react-native-elements';
+import * as firebase from 'firebase'
 
 export default class MainView extends Component {
 
@@ -17,34 +17,15 @@ export default class MainView extends Component {
                color='white'
                onPress={() => navigation.navigate('DrawerOpen')} />
        </View>,   });
-
-    _handleLogout(){
-        try {
-           console.log("press sign out") 
-         firebase.auth().signOut();
-         const resetNavigator = NavigationActions.reset({
-            index: 0,
-            action: NavigationActions.navigate({ routeName: 'Unauthorized',}),
-        });
-        this.props.navigation.dispatch(resetNavigator);
-            } catch (error) {
-            console.log(error);
-        }
-    }
     
     render() {
         const { goBack } = this.props.navigation;
+        console.log(this.props.navigation)
         return(
             <View style={styles.container}>
+            <StatusBar barStyle="light-content"/>
+            
                 <ProjectTable navigation={this.props.navigation}/>
-
-                <TouchableOpacity onPress={()=> goBack()} style={styles.logoutButton}>
-                    <View>
-                        <Text style={styles.logoutText}>
-                            Logout
-                        </Text>
-                    </View>
-                </TouchableOpacity>
             </View>
         );
     }
@@ -56,19 +37,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingTop: '20%',
+
+      
     },
-    logoutButton: {
-        marginTop: "30%",
-        width: "20%",
-        height: 20,
-        backgroundColor: '#fff',
-        opacity: 0.9,
-        borderRadius: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    logoutText:{
-        color: '#95989A',
-    }
 })

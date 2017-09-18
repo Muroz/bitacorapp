@@ -1,10 +1,11 @@
 import React, { Component} from 'react';
-import {StyleSheet, View, Image, Text, KeyboardAvoidingView, NavigatorIOS } from 'react-native';
+import {StyleSheet, View, Image, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-
 import LoginForm from './LoginForm';
 import * as firebase from "firebase";
 
+
+const window = Dimensions.get('window');
 
 export default class Login extends Component {
 
@@ -17,34 +18,31 @@ export default class Login extends Component {
 
     getInitialView() {
         firebase.auth().onAuthStateChanged((user) => {
-        console.log(user)
               if (user != null){
-                const resetNavigator = NavigationActions.reset({
+                const resetAction = NavigationActions.reset({
                     index: 0,
                     actions: [
-                        NavigationActions.navigate({
-                            routeName: 'Authorized',
-                        })
-                    ],
-                });
-                this.props.navigation.dispatch(resetNavigator);
-              }else{
-                  console.log("no user ")
+                      NavigationActions.navigate({ routeName: 'Authorized'})
+                    ]
+                  })
+                  this.props.navigation.dispatch(resetAction)
+                  
+                 
               }
-        
           });
         }
 
     render(){
         return (
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
+            <KeyboardAvoidingView behavior="position" style={styles.container}>
+            
                 <View style={styles.logoContainer}>
                     <View style={styles.logoBorder}>
                         <Image style={styles.logo} source={require('../../imgs/BIT.png')} />
-                        <Text style={styles.title}>
-                            Your construction app
-                        </Text>
                     </View>
+                    <Text style={styles.title}>
+                    Your construction app
+                </Text>
                 </View>
                
                 <View style={styles.formContainer}>
@@ -52,6 +50,8 @@ export default class Login extends Component {
                 </View>
 
             </KeyboardAvoidingView>
+            
+            
         );
     }
 }
@@ -60,44 +60,48 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: "#27364E",
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     logo: {
         alignItems : 'center',
         marginTop : 30,
+        resizeMode: 'contain',
+        
         
     },
     logoContainer: {
         alignItems : 'center',
-         marginTop: 80,
+         marginTop: 50,
          marginBottom: 80,
         flex:2,
-       
+       top:0,
+       left: 0,
     },
     logoBorder:{
-        marginLeft: '20%',
-        marginRight: '20%',
         width: 130,
         height: 130,
-        backgroundColor: "#28110A",
         borderWidth: 2,
         borderColor: "#fff",
         alignItems : 'center',
        
     },
     formContainer: {
-        // marginLeft: 10,
-        // marginRight: 10,
-        flex: 6,
-       //backgroundColor: '#fff',
+        bottom: 0,
+        left:0,
+        marginTop:100,
+        flex: 5,
+        width: window.width - 30,
+        
+   
     },
     title:{
         color: '#fff',
-        marginTop: 50,
+        marginTop: 15,
         fontSize: 14,
         fontWeight: 'bold',
         textAlign: 'center',
         backgroundColor: "#27364E",
-        //flex: 1
 
     }
 });

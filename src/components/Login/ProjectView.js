@@ -3,6 +3,9 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import BitacoraView from './BitacoraView';
 
 export default class ProjectView extends Component {
+    static navigationOptions = ({navigation}) => ({
+        title: navigation.state.params.Project.name,
+      });
     constructor(props) {
         super(props);
         this.state = { Project: undefined } ;
@@ -10,12 +13,10 @@ export default class ProjectView extends Component {
     componentWillMount(){
         const {state} = this.props.navigation;
         this.setState({ Project:state.params.Project })
-        console.log(state.params.Project )
         
-        console.log(this.state)
     }
  
-     static navigationOptions = {title: '1232'};
+    
 
     
     _handleBitacora(){
@@ -37,7 +38,7 @@ export default class ProjectView extends Component {
                 <View style={styles.infoContainer}>
                     <Image source={require('../../imgs/companyLogo.png')} style={styles.logo}/>
                     <View style={styles.infoBox}>
-                        <Text style={styles.infoText}> 1231</Text>
+                        <Text style={styles.infoText}> {this.state.Project.Name}</Text>
                     </View>
                     <View style={styles.infoBox}>
                         <Text style={styles.infoText}> Address: </Text>

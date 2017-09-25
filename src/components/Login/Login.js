@@ -19,7 +19,6 @@ export default class Login extends Component {
         
     }
   
-
     getInitialView() {
         firebase.auth().onAuthStateChanged((user) => {
               if (user != null){

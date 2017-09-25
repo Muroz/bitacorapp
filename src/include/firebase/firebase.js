@@ -2,10 +2,6 @@
 import * as firebase from "firebase";
 
 class Firebase {
-
-    /**
-     * Initialises Firebase
-     */
     static initialize() {
 
         const config = {

@@ -13,15 +13,6 @@ export default class ProjectTableCell extends Component {
       }
 
       openProject(){
-        // const navigateAction = NavigateActions.navigate({
-            
-        //       routeName: 'ProjectView',
-            
-        //       params: { Project: this.state.Project}
-            
-        //     })
-        //     console.log(this.props.navigation)
-        //     this.props.navigation.dispatch(navigateAction)
         const { navigate } = this.props.navigation;
         navigate("ProjectView", {Project:this.state.Project})
         
@@ -38,13 +29,13 @@ export default class ProjectTableCell extends Component {
                     <View style={styles.projectImageView}>
                         <Image
                             style={styles.projectImage}
-                            source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }}
+                            source={{ uri: this.state.Project.PhotoUrl }}
                         />
                     </View>
                     <View style={styles.projectDescriptionView}>
                         <View style={styles.DescriptionView}>
-                            <Text style={styles.projectName}>{this.state.Project.name} </Text>
-                            <Text style={styles.city}>{this.state.Project.city} </Text>
+                            <Text style={styles.projectName}>{this.state.Project.Name} </Text>
+                            <Text style={styles.city}>{this.state.Project.City} </Text>
                         </View>
 
                     </View>

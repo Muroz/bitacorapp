@@ -1,104 +1,119 @@
-import React, { Component} from 'react';
-import {StyleSheet, View, Image, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, Image, Text, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import LoginForm from './LoginForm';
-import * as firebase from "firebase";
-
-
+import * as firebase from 'firebase';
 const window = Dimensions.get('window');
 
 export default class Login extends Component {
 
- static navigationOptions = {header:null };
+    static navigationOptions = { header: null };
 
-    constructor(props){
+    constructor(props) {
         super(props);
     }
-    componentWillMount(){
+    componentWillMount() {
         this.getInitialView();
-        
     }
-  
-    getInitialView() {
-        firebase.auth().onAuthStateChanged((user) => {
-              if (user != null){
-                const resetAction = NavigationActions.reset({
-                    index: 0,
-                    actions: [
-                      NavigationActions.navigate({ routeName: 'Authorized'})
-                    ]
-                  })
-                  this.props.navigation.dispatch(resetAction)
-                  
-                 
-              }
-          });
-        }
 
-    render(){
+    getInitialView() {
+        console.log(firebase);
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user == null) {
+                return
+            }
+            const userRef = firebase.database().ref("Users");
+            userRef.child(user.uid).once('value', (snapshoot) => {
+                let active = snapshoot.child('Active').val()
+                if (active == 1) {
+                    const resetAction = NavigationActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'Authorized' })
+                        ]
+                    })
+                    this.props.navigation.dispatch(resetAction)
+                } else {
+                    this.handleLogout()
+                    alert("activation require")
+
+                }
+            });
+        });
+    }
+
+    handleLogout() {
+        try {
+            firebase.auth().signOut();
+        } catch (error) {
+            alert(error);
+        }
+    }
+
+    render() {
         return (
             <KeyboardAvoidingView behavior="position" style={styles.container}>
-            
+
                 <View style={styles.logoContainer}>
                     <View style={styles.logoBorder}>
                         <Image style={styles.logo} source={require('../../imgs/BIT.png')} />
                     </View>
                     <Text style={styles.title}>
-                    Your construction app
+                        Your construction app
                 </Text>
                 </View>
-               
+
                 <View style={styles.formContainer}>
                     <LoginForm title="Login" navigation={this.props.navigation} />
                 </View>
 
             </KeyboardAvoidingView>
-            
-            
+
+
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
+        flex: 1,
         backgroundColor: "#27364E",
         alignItems: 'center',
         justifyContent: 'center',
     },
     logo: {
-        alignItems : 'center',
-        marginTop : 30,
+        alignItems: 'center',
+        marginTop: 30,
         resizeMode: 'contain',
-        
-        
+
+
     },
     logoContainer: {
-        alignItems : 'center',
-         marginTop: 50,
-         marginBottom: 80,
-        flex:2,
-       top:0,
-       left: 0,
+        alignItems: 'center',
+        marginTop: 50,
+        marginBottom: 80,
+        flex: 2,
+        top: 0,
+        left: 0,
     },
-    logoBorder:{
+    logoBorder: {
         width: 130,
         height: 130,
         borderWidth: 2,
         borderColor: "#fff",
-        alignItems : 'center',
-       
+        alignItems: 'center',
+
     },
     formContainer: {
         bottom: 0,
-        left:0,
-        marginTop:100,
+        left: 0,
+        marginTop: 100,
         flex: 5,
         width: window.width - 30,
-        
-   
+
+
     },
-    title:{
+    title: {
         color: '#fff',
         marginTop: 15,
         fontSize: 14,

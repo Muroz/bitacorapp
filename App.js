@@ -3,17 +3,14 @@ import {
   AppRegistry,
   Text,
 } from 'react-native';
-
-import * as firebase from "firebase";
-
+import * as firebase from 'firebase';
 import { StackNavigator } from 'react-navigation';
 import Login from './src/components/Login/Login';
-import MainView from './src/components/Login/MainView';
-import ProjectView from './src/components/Login/ProjectView';
+import MainView from './src/components/Project/MainView';
+import ProjectView from './src/components/ProjectDetail/ProjectDetailView';
 import DataEntry from './src/components/Login/DataEntry';
-
 import Authorized from './src/navigation/Authorized';
-import Firebase from "./src/include/firebase/firebase";
+import Firebase from './src/include/firebase/firebase';
 const firebaseApp = Firebase.initialize()
 
 class HomeScreen extends React.Component {
@@ -25,6 +22,7 @@ class HomeScreen extends React.Component {
       visible: false
   }
   };
+
   render() {
     return <Text>Hello, Navigation!</Text>;
   }

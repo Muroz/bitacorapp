@@ -1,20 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import ProjectView from './ProjectView';
-import {NavigateActions, StackNavigator} from 'react-navigation'
-export default class ProjectTableCell extends Component {
+import {NavigateActions, StackNavigator} from 'react-navigation';
+import { Icon } from 'react-native-elements';
+
+export default class ProjectDetailRow extends Component {
     constructor(props) {
         super(props);
-        this.state = { Project: undefined } ;
+        this.state = { Project: this.props.Project,
+                        Title: this.props.Title,
+                        IconName: this.props.IconName } ;
       }
     
-      componentWillMount() {
-        this.setState({ Project:this.props.Project });
-      }
+   
 
-      openProject(){
+      openDetailRow(){
         const { navigate } = this.props.navigation;
-        navigate("ProjectView", {Project:this.state.Project})
+        // navigate("ProjectView", {Project:this.state.Project})
         
       }
     
@@ -23,19 +24,19 @@ export default class ProjectTableCell extends Component {
         return (
             <View style={styles.container}>
             <TouchableOpacity style={styles.cell}
-            onPress = {this.openProject.bind(this)}
+            onPress = {this.openDetailRow.bind(this)}
             >
-            
                     <View style={styles.projectImageView}>
-                        <Image
-                            style={styles.projectImage}
-                            source={{ uri: this.state.Project.PhotoUrl }}
-                        />
+                    <Icon
+                        name={this.state.IconName.name}
+                        type={this.state.IconName.type}
+                        size={40}
+                        color='black'
+                         />
                     </View>
                     <View style={styles.projectDescriptionView}>
                         <View style={styles.DescriptionView}>
-                            <Text style={styles.projectName}>{this.state.Project.Name} </Text>
-                            <Text style={styles.city}>{this.state.Project.City} </Text>
+                            <Text style={styles.Ttile}>{this.state.Title} </Text>
                         </View>
 
                     </View>
@@ -49,8 +50,7 @@ export default class ProjectTableCell extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        height: 100,
-        backgroundColor: "grey",
+        height: 70,
         marginTop: 5,
         alignItems: 'center',
         width: '100%',
@@ -71,22 +71,20 @@ const styles = StyleSheet.create({
     projectImageView: {
         flex: 2,
         height: '100%',
-        backgroundColor: "red",
-
     },
 
     projectDescriptionView: {
         flex: 4,
         height: '100%',
-        backgroundColor: "#34495e",
+        backgroundColor: "#3498db",
     },
 
     DescriptionView: {
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 20,
         
     },
-    projectName:{
+    Ttile:{
          
         color:'white',
         fontSize: 20,

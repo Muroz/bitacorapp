@@ -30,11 +30,6 @@ export default class LoginForm extends Component {
                 alert(error)
                 this.setState({ error: 'Authentication failed.', loading: false });
 
-                // firebase.auth().createUserWithEmailAndPassword(email, password).then(() => { 
-                //     this.setState({error: '', email: '', password: '', loading: false });
-                // })
-                //     .catch(() => {
-                //     });
             });
     }
 
@@ -89,9 +84,8 @@ export default class LoginForm extends Component {
               style={styles.input}
               returnKeyType="go"
               ref={(input) => this.passWordInput = input}
-            //   keyboardType="password"
               autoCapitalize="none"
-              autoCorrect={false}
+              autoCorrect={false}  
             />
                 
 
@@ -118,11 +112,12 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     input: {
-        height: 65,
+        height: 70,
         marginBottom: 10,
         paddingHorizontal: 20,
         borderBottomWidth: 1,
         borderColor: '#fff',
+        backgroundColor:'#27364E'
     },
     loginButton: {
         backgroundColor: '#03A9F4',

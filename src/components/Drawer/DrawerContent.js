@@ -15,9 +15,7 @@ export default class DrawerContent extends Component {
               NavigationActions.navigate({ routeName: 'Unauthorized' }),
             ]
           })
-      
           this.props.navigation.dispatch(resetAction);
-       
             } catch (error) {
             alert(error);
         }
@@ -29,7 +27,7 @@ export default class DrawerContent extends Component {
             <DrawerItems {...this.props} />
             
                 <View style={styles.logOutButton}>
-                <Button color='#fff' onPress = {this.handleLogout.bind(this)}title="Log out" />
+                <Button color='black' onPress = {this.handleLogout.bind(this)} title="Log out" />
                     
                 </View>
 
@@ -45,7 +43,7 @@ const styles = {
     },
     logOutButton: {
         height: 50,
-        backgroundColor: '#3498db',
+        // backgroundColor: '#3498db',
         justifyContent: 'center',
         alignItems: 'center'
     },
